@@ -15,6 +15,7 @@ const SearchController = require('./controllers/SearchController');
 //Instaciamos uma nova classe para usar os metodos
 const routes = Router();
 
+//list
 routes.get('/devs', DevController.index);
 
 //show
