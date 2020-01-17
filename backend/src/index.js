@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const routes = require('./routes');
 
 const app = express();
@@ -8,6 +9,9 @@ mongoose.connect('mongodb+srv://omnistack:omnistack@cluster0-hetmf.mongodb.net/w
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
+
+//Para liberar o uso de url externas precisamos instalar o cors
+app.use(cors());
 
 app.use(express.json());
 
