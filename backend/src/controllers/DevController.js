@@ -7,6 +7,7 @@ const Dev = require('../models/Dev');
 //
 const parseStringAsArray = require('../utils/parseStringAsArray');
 
+const { findConnections, sendMessage } = require('../websocket');
 //No maximo 5 metodos do controller: index, show, store, update, destroy
 
 module.exports = {
@@ -53,6 +54,15 @@ module.exports = {
         techs: techsArray,
         location
       });
+
+      //Filtrsar as conexoes que etsao no maximo a 10km de distancia
+      //  e que possuem pelo menos tenhas pelo menosd uma das tecnologias filtradas
+      const sendSocketMessageTo = findConnections(
+        { latitude, longitude },
+        techsArray
+      )
+      sendMessage(sendSocketMessageTo, 'new-dev', dev);
+
     }
     return response.json(dev);
   },
